@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using AutoOglasiAndroid.Models;
+using AutoOglasiAndroid.ViewModels;
 
 namespace AutoOglasiAndroid
 {
@@ -13,7 +14,7 @@ namespace AutoOglasiAndroid
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new Test();
+            BindingContext = new MainPageViewModel();
         }
     }
 }

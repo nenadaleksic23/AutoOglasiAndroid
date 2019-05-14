@@ -5,13 +5,15 @@
              x:Class="AutoOglasiAndroid.MainPage">
 
     <StackLayout>
-        
-        <!-- Place new controls here -->
-        <Label Text="{Binding Name}" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-        <Label Text="{Binding Age}"
-         />
+        <ListView
+            ItemsSource="{Binding items}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Age}"/>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 
 </ContentPage>
