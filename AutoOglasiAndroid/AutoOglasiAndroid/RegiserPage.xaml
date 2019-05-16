@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoOglasiAndroid.RegiserPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Please enter Full Name"
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding FullName}"
+                />
+            <Label Text="Please enter email"
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding Email}"
+                />
+            <Label Text="Please enter password"
+                HorizontalOptions="CenterAndExpand" />
+            <Entry Text="{Binding Password}"/>
+            <Button Text="Register"
+                    Command="{Binding RegisterUserCommand}"
+                    />
+            <Label Text="{Binding Message}"
+                   TextColor="Red"
+                   FontSize="Medium"/>
+
+            <Button
+                Text="Already Have account?Login here!"
+                BackgroundColor="Transparent"
+                Command="{Binding TransferToLogin}"
+                />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

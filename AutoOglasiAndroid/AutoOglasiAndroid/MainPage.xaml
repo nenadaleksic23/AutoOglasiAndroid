@@ -5,12 +5,12 @@
              x:Class="AutoOglasiAndroid.MainPage">
 
     <StackLayout>
-        <ListView
-            ItemsSource="{Binding items}">
+        <ListView x:Name="AllBrands"
+            ItemsSource="{Binding AllBrands}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Age}"/>
-                    
+                    <TextCell Text="{Binding BrendID}" Detail="{Binding NazivBrenda}"/>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

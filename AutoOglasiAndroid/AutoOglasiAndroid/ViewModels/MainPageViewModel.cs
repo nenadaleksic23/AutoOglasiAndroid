@@ -3,25 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using PolovniAutomobili;
+using AutoOglasiAndroid.Helpers;
+using System.Threading.Tasks;
 
 namespace AutoOglasiAndroid.ViewModels
 {
-    class MainPageViewModel
+    public class MainPageViewModel
     {
-        public ObservableCollection<Test> items { get; set; } = new ObservableCollection<Test>();
-
+        public ObservableCollection<BrendAutomobilaModel> AllBrands { get; set; }
+        List<BrendAutomobilaModel> Brands { get; set; }
         public MainPageViewModel()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                Test t = new Test()
-                {
-                    Name = i.ToString() + "Ime",
-                    Age = (18 + i).ToString()
-
-                };
-                items.Add(t);
-            }
+            AllBrands = new ObservableCollection<BrendAutomobilaModel>();
+           
         }
+        
+
+
+        
     }
 }

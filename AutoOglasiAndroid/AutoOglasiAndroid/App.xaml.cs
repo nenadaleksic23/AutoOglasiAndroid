@@ -11,7 +11,7 @@ namespace AutoOglasiAndroid
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new RegiserPage();
         }
 
         protected override void OnStart()

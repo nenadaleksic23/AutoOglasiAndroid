@@ -42,6 +42,9 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClassModels">
+      <HintPath>..\..\..\PolovniAutomobili\PolovniAutomobili\ClassModels\bin\Debug\ClassModels.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
