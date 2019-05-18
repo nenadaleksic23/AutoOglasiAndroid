@@ -17,6 +17,7 @@ namespace AutoOglasiAndroid.Helpers
         {
            
         }
+        public ObservableCollection<AutomobiliModel> automobiliModels { get; set; }
         private static HttpClient client = new HttpClient();
         public ObservableCollection <BrendAutomobilaModel> CarBrands { get; set; }
         public UserModel UserModel { get; set; }
@@ -117,7 +118,7 @@ namespace AutoOglasiAndroid.Helpers
             return model;
         }
 
-        public  async void GetAllBrandsAsync()
+        public  async Task GetAllBrandsAsync()
         {
             string obj = string.Empty;
             Uri path = new Uri($"http://10.0.2.2:58830/api/CarsBrand");
@@ -148,23 +149,37 @@ namespace AutoOglasiAndroid.Helpers
             //return model.ToObservableCollection();
 
         }
-        public async Task<List<Employee>> ReturnAllObjects()
+
+        public async Task GetAllCarsAsync()
         {
-            List<Employee> employees = new List<Employee>();
-            string x = string.Empty;
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(@"http://dummy.restapiexample.com/api/v1/employees");
-            if (response.IsSuccessStatusCode)
+            string obj = string.Empty;
+            Uri path = new Uri($"http://10.0.2.2:58830/api/Cars");
+            HttpRequestMessage httpRequest = new HttpRequestMessage
             {
-                x = await response.Content.ReadAsStringAsync();
-                employees = JsonConvert.DeserializeObject<List<Employee>>(x);
+                RequestUri = path,
+                Method = HttpMethod.Get
+            };
+            httpRequest.Headers.Add("Accept", "application/json");
+            httpRequest.Headers.Add("Host", "localhost");
+            List<AutomobiliModel> model = new List<AutomobiliModel>();
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            try
+            {
+                httpResponse = client.SendAsync(httpRequest).Result;//.GetAwaiter().GetResult();
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var content = httpResponse.Content;
+                    obj = await content.ReadAsStringAsync();
+                    model = JsonConvert.DeserializeObject<List<AutomobiliModel>>(obj);
+                }
             }
-            return employees;
+            catch
+            {
+                model = null;
+            }
+            automobiliModels = model.ToObservableCollection();
+
         }
-        public async Task<List<Employee>> GetObjs()
-        {
-            var x = await ReturnAllObjects();
-            return x;
-        }
+        
     }
 }

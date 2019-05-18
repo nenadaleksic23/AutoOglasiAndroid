@@ -13,25 +13,14 @@ using System.Collections.ObjectModel;
 
 namespace AutoOglasiAndroid
 {
-    public class Employee
-    {
-        public string id { get; set; }
-        public string employee_name { get; set; }
-        public string employee_salary { get; set; }
-        public string employee_age { get; set; }
-        public string profile_image { get; set; }
-    }
+   
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
-            //GetBrands();
+           
             InitializeComponent();
-            ApiHelper helper = new ApiHelper();
-            helper.GetAllBrandsAsync();
-            MainPageViewModel vm = new MainPageViewModel();
-            vm.AllBrands = helper.CarBrands;
-            BindingContext = vm;
+            BindingContext = new MainPageViewModel();
             
         }
        

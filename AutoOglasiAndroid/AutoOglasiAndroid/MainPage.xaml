@@ -5,15 +5,29 @@
              x:Class="AutoOglasiAndroid.MainPage">
 
     <StackLayout>
-        <ListView x:Name="AllBrands"
-            ItemsSource="{Binding AllBrands}">
+        <Label Text="Chose your brand"/>
+        <Picker Title="--Brand Not picked--"
+                ItemsSource="{Binding AllBrands}"
+                ItemDisplayBinding="{Binding NazivBrenda}"/>
+        <Label Text="Year of manufacturing"/>
+        <Picker Title="--Year Not picked--"
+                ItemsSource="{Binding CarYears}"
+                />
+        <Button Text="Search" HorizontalOptions="FillAndExpand"/>
+        <ListView>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding BrendID}" Detail="{Binding NazivBrenda}"/>
+                    <ImageCell
+                       Text="This is first image"
+                        Detail="This is caption"
+                        TextColor="Black"
+                        DetailColor="Gray"
+                        ImageSource="Audi.jpg"/>
 
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
     </StackLayout>
 
 </ContentPage>

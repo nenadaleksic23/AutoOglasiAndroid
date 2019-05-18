@@ -9,15 +9,72 @@ using System.Threading.Tasks;
 
 namespace AutoOglasiAndroid.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : ActivityIndicator
     {
+        ApiHelper apiHelper = new ApiHelper();
         public ObservableCollection<BrendAutomobilaModel> AllBrands { get; set; }
-        List<BrendAutomobilaModel> Brands { get; set; }
+        public ObservableCollection<AutomobiliModel> automobiliModels { get; set; }
+        public ObservableCollection<string> CarYears { get; set; }
+        private BrendAutomobilaModel _SelectedBrand { get; set; }
+        private string _SelectedYear { get; set; }
+        public BrendAutomobilaModel SelectedBrand
+        {
+            get
+            {
+                return this._SelectedBrand;
+            }
+            set
+            {
+                this._SelectedBrand = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SelectedYear
+        {
+            get
+            {
+                return this._SelectedYear;
+            }
+            set
+            {
+                this._SelectedYear = value;
+                OnPropertyChanged();
+            }
+        } 
+
+
         public MainPageViewModel()
         {
-            AllBrands = new ObservableCollection<BrendAutomobilaModel>();
-           
+            
+            GetAllBrands();
+            AddYearsToModel(1990);
+            GetAllCars();
         }
+
+        private async void GetAllBrands()
+        {
+           
+            await apiHelper.GetAllBrandsAsync();
+            AllBrands = apiHelper.CarBrands;
+        }
+
+        public void AddYearsToModel(float year)
+        {
+            CarYears = new ObservableCollection<string>();
+            while(year <= DateTime.Now.Year)
+            {
+                CarYears.Add(year.ToString());
+                year++;
+            }
+
+        }
+        public async void GetAllCars()
+        {
+            automobiliModels = new ObservableCollection<AutomobiliModel>();
+            await apiHelper.GetAllCarsAsync();
+            automobiliModels = apiHelper.automobiliModels;
+        }
+
         
 
 
