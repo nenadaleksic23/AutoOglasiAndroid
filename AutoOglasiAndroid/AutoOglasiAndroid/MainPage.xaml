@@ -3,31 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AutoOglasiAndroid"
              x:Class="AutoOglasiAndroid.MainPage">
-
+    
     <StackLayout>
         <Label Text="Chose your brand"/>
         <Picker Title="--Brand Not picked--"
                 ItemsSource="{Binding AllBrands}"
+                SelectedItem="{Binding SelectedBrand}"
                 ItemDisplayBinding="{Binding NazivBrenda}"/>
         <Label Text="Year of manufacturing"/>
         <Picker Title="--Year Not picked--"
                 ItemsSource="{Binding CarYears}"
+                SelectedItem="{Binding SeelctedYear}"
                 />
-        <Button Text="Search" HorizontalOptions="FillAndExpand"/>
-        <ListView>
+        <Button Text="Search" HorizontalOptions="FillAndExpand" Command="{Binding FilterData}"/>
+        <ListView ItemsSource="{Binding automobiliModels}" HasUnevenRows="True" ItemSelected="ListView_ItemSelected">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell
-                       Text="This is first image"
-                        Detail="This is caption"
-                        TextColor="Black"
-                        DetailColor="Gray"
-                        ImageSource="Audi.jpg"/>
+                <DataTemplate >
+                    <ViewCell Height="150">
+                        <ContentView >
+                            <StackLayout Padding="20">
+                                <!--<StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding SlikaAutomobila}" WidthRequest="120" HeightRequest="75"/>
+                                </StackLayout>-->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{Binding SlikaAutomobila}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Aspect="Fill"/>
+                                    <Label Text="{Binding NazivAutomobila}" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding NazivAutomobila}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </StackLayout>
+                        </ContentView>
 
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
     </StackLayout>
 
 </ContentPage>

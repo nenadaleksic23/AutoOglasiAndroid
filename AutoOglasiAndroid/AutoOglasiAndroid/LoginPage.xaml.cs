@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoOglasiAndroid.ViewModels;
 using Xamarin.Forms;
+using AutoOglasiAndroid.Models;
 using Xamarin.Forms.Xaml;
 
 namespace AutoOglasiAndroid

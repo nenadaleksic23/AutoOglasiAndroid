@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PolovniAutomobili;
 using Xamarin.Forms;
 using AutoOglasiAndroid.Helpers;
+using AutoOglasiAndroid.Models;
 
 namespace AutoOglasiAndroid.ViewModels
 {
@@ -87,14 +88,15 @@ namespace AutoOglasiAndroid.ViewModels
             {
                 this.Message = userModel.Message;
             }
+            else
+            {
+                Settings.UserName = userModel.ImePrezime;
+                Settings.Email = userModel.Email;
+                Settings.UserID = userModel.Id;
+            }
            
         }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
 
-        //void OnPropertyChanged([CallerMemberName] string Name = "")
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
-        //}
     }
 }

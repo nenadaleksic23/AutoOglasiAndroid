@@ -1,5 +1,5 @@
 ﻿using System;
-
+using AutoOglasiAndroid.Models;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -14,6 +14,7 @@ namespace AutoOglasiAndroid.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -21,5 +22,6 @@ namespace AutoOglasiAndroid.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
+
     }
 }

@@ -6,6 +6,9 @@ using System.Text;
 using PolovniAutomobili;
 using AutoOglasiAndroid.Helpers;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using System.Linq;
+
 
 namespace AutoOglasiAndroid.ViewModels
 {
@@ -16,7 +19,11 @@ namespace AutoOglasiAndroid.ViewModels
         public ObservableCollection<AutomobiliModel> automobiliModels { get; set; }
         public ObservableCollection<string> CarYears { get; set; }
         private BrendAutomobilaModel _SelectedBrand { get; set; }
+        private AutomobiliModel _SelectedCar { get; set; }
         private string _SelectedYear { get; set; }
+        private Command _FitlerData;
+
+
         public BrendAutomobilaModel SelectedBrand
         {
             get
@@ -26,6 +33,18 @@ namespace AutoOglasiAndroid.ViewModels
             set
             {
                 this._SelectedBrand = value;
+                OnPropertyChanged();
+            }
+        }
+        public AutomobiliModel SelectedCar
+        {
+            get
+            {
+                return this._SelectedCar;
+            }
+            set
+            {
+                this._SelectedCar = value;
                 OnPropertyChanged();
             }
         }
@@ -40,7 +59,17 @@ namespace AutoOglasiAndroid.ViewModels
                 this._SelectedYear = value;
                 OnPropertyChanged();
             }
-        } 
+        }
+        public Command FilterData
+        {
+            get
+            {
+                return this._FitlerData = new Command(() =>
+                {
+                    FilerDataList();
+                });
+            }
+        }
 
 
         public MainPageViewModel()
@@ -75,9 +104,15 @@ namespace AutoOglasiAndroid.ViewModels
             automobiliModels = apiHelper.automobiliModels;
         }
 
-        
+        public async void FilerDataList()
+        {
+            await apiHelper.GetCarByCriteria("1",SelectedYear.ToString());
+            automobiliModels = apiHelper.automobiliModels;
+        }
 
 
-        
+
+
+
     }
 }
