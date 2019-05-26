@@ -30,7 +30,7 @@ namespace AutoOglasiAndroid
             else
             {
                 AutomobiliModel model = e.SelectedItem as AutomobiliModel;
-                await Navigation.PushAsync(new NavigationPage(new CarPage(model)));
+                await Navigation.PushAsync(new NavigationPage(new UserCarPage(model)));
 
 
             }

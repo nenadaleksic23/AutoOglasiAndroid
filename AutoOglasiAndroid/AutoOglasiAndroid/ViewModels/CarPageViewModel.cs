@@ -70,14 +70,14 @@ namespace AutoOglasiAndroid.ViewModels
         public CarPageViewModel(AutomobiliModel model)
         {
             automobiliModel = model;
-            GetComments();
+            GetComments(automobiliModel.AutomobilID);
         }
          
 
-    private async void GetComments()
+    protected async void GetComments(int id)
         {
             automobiliModel.KomentariZaAutomobil = new List<KomentariModel>();
-            await apiHelper.GetCommentByCarIdAsync(automobiliModel.AutomobilID);
+            await apiHelper.GetCommentByCarIdAsync(id);
             Komentari = apiHelper.Komentari;
             if(Komentari.Count == 0)
             {
@@ -89,7 +89,7 @@ namespace AutoOglasiAndroid.ViewModels
             }
         }
 
-        private async void InsertComment()
+        protected async void InsertComment()
         {
             Settings.UserID = 1;
             if(Settings.UserID == 0)

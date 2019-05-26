@@ -4,9 +4,24 @@
              x:Class="AutoOglasiAndroid.UserCarPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{Binding automobiliModel.SlikaAutomobila}"/>
+            <Label Text="{Binding automobiliModel.NazivAutomobila}"/>
+
+            <Label Text="Komentari" FontSize="20" TextColor="Gray"/>
+            <!--<Label Text="{Binding HaveComments}"/>-->
+            <ListView ItemsSource="{Binding Komentari}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Komentar}"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Comment:"/>
+            <Entry Text="{Binding WrittenComment}"/>
+            <Button Text="Submit" Command="{Binding InsertCommentCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

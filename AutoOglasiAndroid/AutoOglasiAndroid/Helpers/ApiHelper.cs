@@ -330,18 +330,17 @@ namespace AutoOglasiAndroid.Helpers
             return res;
            
         }
-        public async Task<string> DeleteCar(int id)
+        public async Task<string> DeleteCarAsync(int id)
         {
             string res = string.Empty;
-            Uri path = new Uri($"http://10.0.2.2:58830/api/Comments/{id}");
+            Uri path = new Uri($"http://10.0.2.2:58830/api/Cars/{id}?mode=delete");
             HttpRequestMessage httpRequest = new HttpRequestMessage
             {
                 RequestUri = path,
-                Method = HttpMethod.Get
+                Method = HttpMethod.Post
             };
             httpRequest.Headers.Add("Accept", "application/json");
             httpRequest.Headers.Add("Host", "localhost");
-            List<KomentariModel> komentariModel = new List<KomentariModel>();
             HttpResponseMessage httpResponse = new HttpResponseMessage();
             try
             {
