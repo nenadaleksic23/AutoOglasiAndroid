@@ -8,7 +8,8 @@
             <Label Text="{Binding automobiliModel.NazivAutomobila}"/>
 
             <Label Text="Komentari" FontSize="20" TextColor="Gray"/>
-            <ListView ItemsSource="{Binding automobiliModel.KomentariZaAutomobil}">
+            <!--<Label Text="{Binding HaveComments}"/>-->
+            <ListView ItemsSource="{Binding Komentari}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -17,6 +18,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Label Text="Comment:"/>
+            <Entry Text="{Binding WrittenComment}"/>
+            <Button Text="Submit" Command="{Binding InsertCommentCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

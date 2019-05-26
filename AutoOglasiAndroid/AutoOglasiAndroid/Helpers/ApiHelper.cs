@@ -21,9 +21,10 @@ namespace AutoOglasiAndroid.Helpers
         public ObservableCollection<AutomobiliModel> FilteredAutomobiliModels { get; set; }
         private static HttpClient client = new HttpClient();
         public ObservableCollection <BrendAutomobilaModel> CarBrands { get; set; }
-        public List<KomentariModel> Komentari { get; set; }
+        public ObservableCollection<KomentariModel> Komentari { get; set; }
         public UserModel UserModel { get; set; }
-       
+
+        public ObservableCollection<AutomobiliModel> CarsForUser { get; set; }
         public  async void RegisterUserAsync(UserModel model)
         {
             UserModel userModel = new UserModel();
@@ -104,7 +105,7 @@ namespace AutoOglasiAndroid.Helpers
             HttpResponseMessage httpResponse = new HttpResponseMessage();
             try
             {
-                httpResponse = await client.SendAsync(httpRequest);
+                httpResponse = client.SendAsync(httpRequest).Result;
                 if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var content = httpResponse.Content;
@@ -182,6 +183,38 @@ namespace AutoOglasiAndroid.Helpers
             automobiliModels = model.ToObservableCollection();
 
         }
+        public async Task GetCarsForUser(int id)
+        {
+            CarsForUser = new ObservableCollection<AutomobiliModel>();
+            string obj = string.Empty;
+            Uri path = new Uri($"http://10.0.2.2:58830/api/Cars/{id}");
+            HttpRequestMessage httpRequest = new HttpRequestMessage
+            {
+                RequestUri = path,
+                Method = HttpMethod.Get
+            };
+            httpRequest.Headers.Add("Accept", "application/json");
+            httpRequest.Headers.Add("Host", "localhost");
+            List<AutomobiliModel> model = new List<AutomobiliModel>();
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            try
+            {
+                httpResponse = client.SendAsync(httpRequest).Result;
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var content = httpResponse.Content;
+                    obj = await content.ReadAsStringAsync();
+                    model = JsonConvert.DeserializeObject<List<AutomobiliModel>>(obj);
+                }
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            CarsForUser = model.ToObservableCollection();
+
+           
+        }
 
         public async Task GetCarByCriteria(string brand,string year)
         {
@@ -198,7 +231,7 @@ namespace AutoOglasiAndroid.Helpers
             HttpResponseMessage httpResponse = new HttpResponseMessage();
             try
             {
-                httpResponse = client.SendAsync(httpRequest).Result;//.GetAwaiter().GetResult();
+                httpResponse = client.SendAsync(httpRequest).Result;
                 if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var content = httpResponse.Content;
@@ -216,7 +249,7 @@ namespace AutoOglasiAndroid.Helpers
         
         public async Task GetCommentByCarIdAsync(int id)
         {
-            Komentari = new List<KomentariModel>();
+            Komentari = new ObservableCollection<KomentariModel>();
             Uri path = new Uri($"http://10.0.2.2:58830/api/Comments/{id}");
             HttpRequestMessage httpRequest = new HttpRequestMessage
             {
@@ -241,7 +274,89 @@ namespace AutoOglasiAndroid.Helpers
             {
                 
             }
-            Komentari = komentariModel;
+            Komentari = komentariModel.ToObservableCollection();
+        }
+        public  async Task<string> InsertComment(KomentariModel model)
+        {
+            string res = string.Empty;
+            Uri path = new Uri($"http://10.0.2.2:58830/api/Comments?Komentar={model.Komentar}&KorisnikID={model.KorisnikID}&autoID={model.AutomobilID}");
+            HttpRequestMessage httpRequest = new HttpRequestMessage
+            {
+                RequestUri = path,
+                Method = HttpMethod.Post
+            };
+            httpRequest.Headers.Add("Accept", "application/json");
+            httpRequest.Headers.Add("Host", "localhost");
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            try
+            {
+                httpResponse =  client.SendAsync(httpRequest).Result;
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK || httpResponse.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    res = "OK";
+
+                }
+                
+            }
+            catch
+            {
+                res = "failed";
+            }
+            return res;
+        }
+
+        public async Task<string> InsertCar(AutomobiliModel model)
+        {
+            string res = string.Empty;
+           
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            var json = JsonConvert.SerializeObject(model);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+            client.DefaultRequestHeaders.Add("Accept", "application/json");
+            client.DefaultRequestHeaders.Add("Host", "localhost");
+            try
+            {
+                httpResponse = client.PostAsJsonAsync(@"http://10.0.2.2:58830/api/Cars", model).Result;
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK || httpResponse.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    res = "OK";
+                }
+
+            }
+            catch(Exception ex)
+            {
+                res = "failed";
+            }
+            return res;
+           
+        }
+        public async Task<string> DeleteCar(int id)
+        {
+            string res = string.Empty;
+            Uri path = new Uri($"http://10.0.2.2:58830/api/Comments/{id}");
+            HttpRequestMessage httpRequest = new HttpRequestMessage
+            {
+                RequestUri = path,
+                Method = HttpMethod.Get
+            };
+            httpRequest.Headers.Add("Accept", "application/json");
+            httpRequest.Headers.Add("Host", "localhost");
+            List<KomentariModel> komentariModel = new List<KomentariModel>();
+            HttpResponseMessage httpResponse = new HttpResponseMessage();
+            try
+            {
+                httpResponse =  client.SendAsync(httpRequest).GetAwaiter().GetResult();
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    res = "OK";
+                }
+            }
+            catch
+            {
+                res = "failed";
+            }
+            return res;
+
         }
 
     }

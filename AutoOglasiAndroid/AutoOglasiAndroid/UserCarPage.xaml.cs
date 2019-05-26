@@ -5,19 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoOglasiAndroid.ViewModels;
 using Xamarin.Forms;
-using AutoOglasiAndroid.Models;
 using Xamarin.Forms.Xaml;
+using PolovniAutomobili;
 
 namespace AutoOglasiAndroid
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginPage : ContentPage
+	public partial class UserCarPage : ContentPage
 	{
-		public LoginPage (string email)
+		public UserCarPage (AutomobiliModel model)
 		{
-            
 			InitializeComponent ();
-            BindingContext = new LoginPageViewModel();
+            BindingContext = new UserCarPageViewModel(model);
 		}
 	}
 }

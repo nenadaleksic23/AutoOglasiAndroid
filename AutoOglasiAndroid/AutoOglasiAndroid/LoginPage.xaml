@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AutoOglasiAndroid.LoginPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Start">
+        <StackLayout Padding="20">
             <Label Text="Please enter your Username"
                 HorizontalOptions="CenterAndExpand" 
                   Margin="10"/>
@@ -36,6 +36,7 @@
                     Command="{Binding TransferToRegisterPage}"
                    
                 />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" x:Name="ActivittIndicator"/>
         </StackLayout>
 
     </ContentPage.Content>

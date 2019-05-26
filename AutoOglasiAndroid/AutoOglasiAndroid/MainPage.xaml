@@ -8,12 +8,13 @@
         <Label Text="Chose your brand"/>
         <Picker Title="--Brand Not picked--"
                 ItemsSource="{Binding AllBrands}"
-                SelectedItem="{Binding SelectedBrand}"
-                ItemDisplayBinding="{Binding NazivBrenda}"/>
+                ItemDisplayBinding="{Binding NazivBrenda}" SelectedIndexChanged="Picker_SelectedIndexChangedBrands"/>
+        
         <Label Text="Year of manufacturing"/>
         <Picker Title="--Year Not picked--"
                 ItemsSource="{Binding CarYears}"
                 SelectedItem="{Binding SeelctedYear}"
+                SelectedIndexChanged="Picker_SelectedIndexChangedYears"
                 />
         <Button Text="Search" HorizontalOptions="FillAndExpand" Command="{Binding FilterData}"/>
         <ListView ItemsSource="{Binding automobiliModels}" HasUnevenRows="True" ItemSelected="ListView_ItemSelected">
@@ -46,6 +47,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Text="Go to User Page" Clicked="Button_Clicked"></Button>
     </StackLayout>
 
 </ContentPage>

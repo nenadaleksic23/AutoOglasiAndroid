@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoOglasiAndroid.UserCars">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <ListView ItemsSource="{Binding automobili}" HasUnevenRows="True" ItemSelected="ListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell Height="150">
+                            <ContentView >
+                                <StackLayout Padding="20">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="2*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="{Binding SlikaAutomobila}" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Aspect="Fill"/>
+                                        <Label Text="{Binding NazivAutomobila}" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
+                                        <Label Text="{Binding NazivAutomobila}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"/>
+                                    </Grid>
+                                </StackLayout>
+                            </ContentView>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Add new Car" Clicked="Button_Clicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

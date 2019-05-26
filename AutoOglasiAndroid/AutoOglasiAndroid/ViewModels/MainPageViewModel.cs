@@ -16,18 +16,33 @@ namespace AutoOglasiAndroid.ViewModels
     {
         ApiHelper apiHelper = new ApiHelper();
         public ObservableCollection<BrendAutomobilaModel> AllBrands { get; set; }
-        public ObservableCollection<AutomobiliModel> automobiliModels { get; set; }
+        private ObservableCollection<AutomobiliModel> _automobiliModels { get; set; }
         public ObservableCollection<string> CarYears { get; set; }
-        private BrendAutomobilaModel _SelectedBrand { get; set; }
         private AutomobiliModel _SelectedCar { get; set; }
         private string _SelectedYear { get; set; }
         private Command _FitlerData;
+        private Command _GoToUsePageCommand;
 
+        private string _SelectedBrand { get; set; }
 
-        public BrendAutomobilaModel SelectedBrand
+        public ObservableCollection<AutomobiliModel> automobiliModels {
+            get
+            {
+                return this._automobiliModels;
+            }
+            set
+            {
+                this._automobiliModels = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SelectedBrand
         {
             get
             {
+                if (_SelectedBrand == null)
+                    _SelectedBrand = "";
                 return this._SelectedBrand;
             }
             set
@@ -36,22 +51,13 @@ namespace AutoOglasiAndroid.ViewModels
                 OnPropertyChanged();
             }
         }
-        public AutomobiliModel SelectedCar
-        {
-            get
-            {
-                return this._SelectedCar;
-            }
-            set
-            {
-                this._SelectedCar = value;
-                OnPropertyChanged();
-            }
-        }
+     
         public string SelectedYear
         {
             get
             {
+                if (_SelectedYear == null)
+                    _SelectedYear = "";
                 return this._SelectedYear;
             }
             set
@@ -66,10 +72,22 @@ namespace AutoOglasiAndroid.ViewModels
             {
                 return this._FitlerData = new Command(() =>
                 {
-                    FilerDataList();
+                    FilterCarsByCriteria();
                 });
             }
         }
+        public Command GoToUsePageCommand
+        {
+            get
+            {
+                return this._GoToUsePageCommand = new Command(() =>
+                {
+                    Application.Current.MainPage = new NavigationPage(new UserCars());
+                });
+            }
+        }
+
+        
 
 
         public MainPageViewModel()
@@ -97,18 +115,19 @@ namespace AutoOglasiAndroid.ViewModels
             }
 
         }
-        public async void GetAllCars()
+        private async void GetAllCars()
         {
             automobiliModels = new ObservableCollection<AutomobiliModel>();
             await apiHelper.GetAllCarsAsync();
             automobiliModels = apiHelper.automobiliModels;
         }
 
-        public async void FilerDataList()
+        private async void FilterCarsByCriteria()
         {
-            await apiHelper.GetCarByCriteria("1",SelectedYear.ToString());
+            await apiHelper.GetCarByCriteria(SelectedBrand,SelectedYear);
             automobiliModels = apiHelper.automobiliModels;
         }
+        
 
 
 

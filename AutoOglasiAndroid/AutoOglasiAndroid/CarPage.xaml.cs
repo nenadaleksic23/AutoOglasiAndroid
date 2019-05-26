@@ -15,7 +15,7 @@ namespace AutoOglasiAndroid
 	{
 		public CarPage (PolovniAutomobili.AutomobiliModel model)
 		{
-            IsLoggedAsync();
+            //IsLoggedAsync();
 			InitializeComponent ();
             BindingContext = new CarPageViewModel(model);
 		}
@@ -24,7 +24,7 @@ namespace AutoOglasiAndroid
         {
             if (string.IsNullOrEmpty(Settings.UserName) && string.IsNullOrEmpty(Settings.Email) && Settings.UserID == 0)
             {
-                await Navigation.PushAsync(new NavigationPage(new LoginPage()));
+                await Navigation.PushAsync(new NavigationPage(new LoginPage(string.Empty)));
             }
         }
 	}

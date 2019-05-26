@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AutoOglasiAndroid.CreateCarPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/> 
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Label Text="Please chose brand:"  Grid.Row="0" Grid.Column="0"/>
+            <Picker ItemsSource="{Binding CarBrands}" Grid.Row="1" Grid.Column="1" ItemDisplayBinding="{Binding NazivBrenda}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+            <Label Text="Enter name of car:" Grid.Row="2" Grid.Column="2"/>
+            <Entry Text="{Binding NazivAutomobila}" Grid.Row="3" Grid.Column="3"/>
+            <Label Text="Enter year of car" Grid.Row="4" Grid.Column="4"/>
+            <Entry Text="{Binding Godiste}" Grid.Row="5" Grid.Column="5"/>
+            <Label Text="Description" Grid.Row="6" Grid.Column="6" />
+            <Entry Text="{Binding Opis}" Grid.Row="7" Grid.Column="7"/>
+            <Label  Text="Engine" Grid.Row="8" Grid.Column="8" />
+            <Entry Text="{Binding Kubikaza}" Grid.Row="9" Grid.Column="9"/>
+            <Label  Text="HorsePower" Grid.Row="10" Grid.Column="10" />
+            <Entry Text="{Binding SnagaMotora}" Grid.Row="11" Grid.Column="11"/>
+            <Button Command="{Binding AddNewCarCommand}" Text="Upload car"></Button>
+            <Grid></Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

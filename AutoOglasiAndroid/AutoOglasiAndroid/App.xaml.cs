@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AutoOglasiAndroid.Models;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AutoOglasiAndroid
@@ -11,7 +13,16 @@ namespace AutoOglasiAndroid
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            if(Settings.UserID == 0)
+            {
+                MainPage = new NavigationPage(new LoginPage(string.Empty));
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+           
+            
         }
 
         protected override void OnStart()

@@ -16,11 +16,12 @@ namespace AutoOglasiAndroid
    
     public partial class MainPage : ContentPage
     {
+        MainPageViewModel VM = new MainPageViewModel();
         public MainPage()
         {
            
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = VM;
             
         }
 
@@ -32,19 +33,39 @@ namespace AutoOglasiAndroid
             }
             else
             {
-                //if (string.IsNullOrEmpty(Settings.UserName) && string.IsNullOrEmpty(Settings.Email) && Settings.UserID == 0)
-                //{
-                //    await Navigation.PushAsync(new NavigationPage(new LoginPage()));
-                //}
-                //else
-                //{
                     AutomobiliModel  model = e.SelectedItem as AutomobiliModel;
                     await Navigation.PushAsync(new NavigationPage(new CarPage(model)));
-                //}
-               
+
             }
 
         }
 
+        private void Picker_SelectedIndexChangedBrands(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                VM.SelectedBrand = picker.Items[selectedIndex];
+            }
+        }
+
+        private void Picker_SelectedIndexChangedYears(object sender, EventArgs e)
+        {
+            var picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                VM.SelectedYear = picker.Items[selectedIndex];
+            }
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NavigationPage(new UserCars()));
+
+        }
     }
 }

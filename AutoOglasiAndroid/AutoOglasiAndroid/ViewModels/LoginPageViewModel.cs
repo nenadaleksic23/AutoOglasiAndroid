@@ -13,6 +13,10 @@ namespace AutoOglasiAndroid.ViewModels
 {
     public class LoginPageViewModel:ActivityIndicator,INotifyPropertyChanged
     {
+        public LoginPageViewModel()
+        {
+            this.IsBusy = false;
+        }
         private string _Message { get; set; }
         
         private string _UserName;
@@ -29,6 +33,7 @@ namespace AutoOglasiAndroid.ViewModels
             }
             set
             {
+                
                 this._Message = value;
                 OnPropertyChanged();
             }
@@ -73,7 +78,7 @@ namespace AutoOglasiAndroid.ViewModels
             {
                 return _TransferToRegisterPage = new Command(() =>
                 {                    
-                    Application.Current.MainPage = new RegiserPage();
+                    Application.Current.MainPage = new NavigationPage(new RegiserPage());
                 });
             }
         }
@@ -93,7 +98,10 @@ namespace AutoOglasiAndroid.ViewModels
                 Settings.UserName = userModel.ImePrezime;
                 Settings.Email = userModel.Email;
                 Settings.UserID = userModel.Id;
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+
             }
+            this.IsBusy = false;
            
         }
 

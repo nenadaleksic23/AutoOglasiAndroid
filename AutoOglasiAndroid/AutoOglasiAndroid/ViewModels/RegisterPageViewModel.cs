@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using AutoOglasiAndroid.Models;
 
 namespace AutoOglasiAndroid.ViewModels
 {
@@ -36,7 +37,7 @@ namespace AutoOglasiAndroid.ViewModels
             {
                 return _TransferToLogin = new Command(() =>
                 {
-                    Application.Current.MainPage = new LoginPage();
+                    Application.Current.MainPage = new LoginPage(string.Empty);
                 });
             }
         }
@@ -54,8 +55,11 @@ namespace AutoOglasiAndroid.ViewModels
             {
                 Message = apiHelper.UserModel.Message;
             }
+            else
+            {
+                Application.Current.MainPage = new LoginPage(user.Email);
+            }
             IsBusy = false;
-
         }
 
 
